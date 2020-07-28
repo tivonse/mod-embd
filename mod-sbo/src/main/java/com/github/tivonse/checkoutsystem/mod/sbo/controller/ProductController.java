@@ -4,13 +4,11 @@ import com.github.tivonse.checkoutsystem.mod.sbo.controller.generic.EntityContro
 import com.github.tivonse.checkoutsystem.mod.sbo.model.Product;
 import com.github.tivonse.checkoutsystem.mod.sbo.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
+import java.util.UUID;
 
 @RestController
 public class ProductController extends EntityController<Product> {
@@ -20,17 +18,18 @@ public class ProductController extends EntityController<Product> {
 
     @PostMapping(value = "/products/create")
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
-        Product createdProduct = productService.createProduct(product);
+        return new ResponseEntity<>(productService.save(product), HttpStatus.CREATED);
+    }
 
-        if (createdProduct == null) {
-            return ResponseEntity.notFound().build();
-        } else {
-            URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                    .path("/{id}")
-                    .buildAndExpand(product.getId())
-                    .toUri();
-            return ResponseEntity.created(uri).body(product);
-        }
+    @PutMapping(value = "/products/update")
+    public ResponseEntity<Product> updateProduct(@RequestBody Product product) {
+        return new ResponseEntity<>(productService.updateById(product.getId(), product), HttpStatus.ACCEPTED);
+    }
+
+    @DeleteMapping(value = "/products/{id}")
+    public ResponseEntity<Void> deleteProductById(@PathVariable String id) {
+        productService.deleteById(UUID.fromString(id));
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }
