@@ -16,11 +16,11 @@ import javax.persistence.*;
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Bundle.class/*, resolver = ObjectIdResolver.class*/)
 public class Bundle extends EntityObject {
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id")
-    @JsonIdentityReference(alwaysAsId = true)
-    @JsonBackReference
-    private Product product;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "product_id")
+//    @JsonIdentityReference(alwaysAsId = true)
+//    @JsonBackReference
+//    private Product product;
 
     @Column(name = "purchased_count")
     private int purchasedCount;
@@ -30,4 +30,7 @@ public class Bundle extends EntityObject {
 
     @Column(name = "name")
     private String description;
+
+    @Column(name = "effective")
+    private boolean effective;
 }

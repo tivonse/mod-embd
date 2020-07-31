@@ -17,12 +17,6 @@ import java.math.BigDecimal;
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Discount.class/*, resolver = ObjectIdResolver.class*/)
 public class Discount extends EntityObject {
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id")
-    @JsonIdentityReference(alwaysAsId = true)
-    @JsonBackReference
-    private Product product;
-
     @Column(name = "purchased_count")
     private int purchasedCount;
 
@@ -32,7 +26,7 @@ public class Discount extends EntityObject {
     @Column(name = "rate")
     private BigDecimal rate;
 
-    @Column(name = "valid")
-    private boolean valid;
+    @Column(name = "effective")
+    private boolean effective;
 
 }

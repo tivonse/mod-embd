@@ -51,10 +51,10 @@ public class ProductControllerTest {
         mockProduct.setId(uuid);
         mockProduct.setUnitPrice(BigDecimal.valueOf(2680));
         mockProduct.setDescription("GoPro HERO5 Silver");
-        mockProduct.setDiscounted(true);
-        mockProduct.setDiscounts(null);
-        mockProduct.setBundled(true);
-        mockProduct.setBundles(null);
+        mockProduct.setDiscountable(true);
+//        mockProduct.setDiscounts(null);
+        mockProduct.setBundlable(true);
+//        mockProduct.setBundles(null);
 
         mockUpdatedProduct.setId(UUID.fromString("cc6ef721-0aba-4014-a285-3a8af375d9ef"));
         mockUpdatedProduct.setUnitPrice(BigDecimal.valueOf(3300));

@@ -30,8 +30,9 @@ public class ProductService {
 
         existingProduct.setUnitPrice(request.getUnitPrice());
         existingProduct.setDescription(request.getDescription());
-        existingProduct.setBundled(request.isBundled());
-        existingProduct.setDiscounted(request.isDiscounted());
+        existingProduct.setBundlable(request.isBundlable());
+        existingProduct.setDiscountable(request.isDiscountable());
+        existingProduct.setDiscount(request.getDiscount());
 
         // TODO ...
         return productRepository.save(existingProduct);

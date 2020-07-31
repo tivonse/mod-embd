@@ -26,18 +26,19 @@ public class Product extends EntityObject {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "bundled")
-    private boolean bundled;
+    @Column(name = "bundlable")
+    private boolean bundlable;
 
-    @OneToMany(fetch = FetchType.LAZY/*, mappedBy = "product"*/)
-    @JsonManagedReference
-    private Set<Bundle> bundles = new HashSet<>();
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+//    @JsonManagedReference
+//    private Set<Bundle> bundles = new HashSet<>();
 
-    @Column(name = "discounted")
-    private boolean discounted;
+    @Column(name = "discountable")
+    private boolean discountable;
 
-    @OneToMany(fetch = FetchType.LAZY/*, mappedBy = "product"*/)
-    @JsonManagedReference
-    private Set<Discount> discounts = new HashSet<>();
+    @OneToOne
+    @JoinColumn(name = "discount_id")
+    @JsonIdentityReference(alwaysAsId = true)
+    private Discount discount;
 
 }
